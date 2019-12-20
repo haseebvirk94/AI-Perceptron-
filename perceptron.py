@@ -10,6 +10,7 @@ activation=[]
 arguments=sys.argv
 col_names=[]
 
+
 # for set the value of Threshould
 
 def fixThreshold(error):
@@ -29,12 +30,12 @@ def predict(row):
 # update weights according to error
 
 def errorSolving(error,row):
-    for i in range (1,len(weights)):
+    for i in range (0,len(weights)):
         weights[i]=weights[i]+learning_rate*(error)*row[i-1]
 
 #inialize the weights and threshould randomly
 def initialize():  
-    weights.append(random.uniform(learning_rate,1))     
+    weights.append(random.uniform(-0.5,0.5))     
     for j in range(0,len(data_csv.columns)-1):
         ran=random.uniform(0,1)
         weights.append(ran)
@@ -49,7 +50,7 @@ def learn():
             actualOutput=data[i][len(data_csv.columns)-1]
             error=actualOutput-value
             errorSolving(error,data[i])
-            fixThreshold(error)
+            #fixThreshold(error)
             save()
             if error!=0.0:
                 flag=True  
